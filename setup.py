@@ -1,4 +1,7 @@
 #python setup.py develop
+#the setup.py develop command. It works very similarly to setup.py install, except that it doesn’t actually install anything. Instead, it creates a special .egg-link file in the deployment directory, that links to your project’s source code.
+#When you’re done with a given development task, you can remove the project source from a staging area using setup.py develop --uninstall, specifying the desired staging area if it’s not the default.
+
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as readme_file:
