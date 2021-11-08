@@ -28,8 +28,8 @@ from tqdm import tqdm
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))  # add ROOT to PATH
+# if str(ROOT) not in sys.path:
+#     sys.path.append(str(ROOT))  # add ROOT to PATH
 
 import val  # for end-of-epoch mAP
 from models.experimental import attempt_load
@@ -470,13 +470,13 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', type=str, default='../YOLOmodels/yolov4-p5.pt', help='initial weights path')#yolov5l.pt yolov5s.pt
-    parser.add_argument('--cfg', type=str, default='models/yolov4-p5.yaml', help='model.yaml path')
-    parser.add_argument('--data', type=str, default='data/mycoco.yaml', help='dataset.yaml path')
+    parser.add_argument('--weights', type=str, default='../YOLOmodels/yolov5s.pt', help='initial weights path')#yolov5l.pt yolov5s.pt yolov4-p5.pt
+    parser.add_argument('--cfg', type=str, default='models/yolov5s.yaml', help='model.yaml path')#yolov4-p5.yaml
+    parser.add_argument('--data', type=str, default='data/waymococo.yaml', help='dataset.yaml path')#mycoco.yaml
     parser.add_argument('--hyp', type=str, default='data/hyps/hyp.scratch.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--batch-size', type=int, default=8, help='total batch size for all GPUs')
-    parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=640, help='train, val image size (pixels)')
+    parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=1280, help='train, val image size (pixels)')#640
     parser.add_argument('--rect', action='store_true', help='rectangular training')
     parser.add_argument('--resume', nargs='?', const=True, default=False, help='resume most recent training')
     parser.add_argument('--nosave', action='store_true', help='only save final checkpoint')
@@ -512,7 +512,7 @@ def parse_opt(known=False):
 
 def main(opt, callbacks=Callbacks()):
     # Checks
-    set_logging(RANK)
+    #set_logging(RANK)
     if RANK in [-1, 0]:
         print_args(FILE.stem, opt)
         check_git_status()
