@@ -144,7 +144,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
     # Optimizer
     nbs = 64  # nominal batch size
-    accumulate = max(round(nbs / batch_size), 1)  # accumulate loss before optimizing
+    accumulate = max(round(nbs / batch_size), 1)  #8  accumulate loss before optimizing
     hyp['weight_decay'] *= batch_size * accumulate / nbs  # scale weight_decay
     LOGGER.info(f"Scaled weight_decay = {hyp['weight_decay']}")
 
@@ -470,7 +470,7 @@ def train(hyp,  # path/to/hyp.yaml or hyp dictionary
 
 def parse_opt(known=False):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', type=str, default='../YOLOmodels/yolov5s.pt', help='initial weights path')#yolov5l.pt yolov5s.pt yolov4-p5.pt
+    parser.add_argument('--weights', type=str, default='runs/train/yolov5scoco/weights/best.pt', help='initial weights path')#../YOLOmodels/yolov5s.pt yolov5l.pt yolov5s.pt yolov4-p5.pt
     parser.add_argument('--cfg', type=str, default='models/yolov5s.yaml', help='model.yaml path')#yolov4-p5.yaml
     parser.add_argument('--data', type=str, default='data/waymococo.yaml', help='dataset.yaml path')#mycoco.yaml
     parser.add_argument('--hyp', type=str, default='data/hyps/hyp.scratch.yaml', help='hyperparameters path')
@@ -478,7 +478,7 @@ def parse_opt(known=False):
     parser.add_argument('--batch-size', type=int, default=8, help='total batch size for all GPUs')
     parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=1280, help='train, val image size (pixels)')#640
     parser.add_argument('--rect', action='store_true', help='rectangular training')
-    parser.add_argument('--resume', nargs='?', const=True, default=False, help='resume most recent training')
+    parser.add_argument('--resume', nargs='?', const=True, default=True, help='resume most recent training')
     parser.add_argument('--nosave', action='store_true', help='only save final checkpoint')
     parser.add_argument('--noval', action='store_true', help='only validate final epoch')
     parser.add_argument('--noautoanchor', action='store_true', help='disable autoanchor check')
